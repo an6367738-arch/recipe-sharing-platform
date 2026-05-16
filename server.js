@@ -1,7 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+
 const recipeRoutes = require("./routes/recipeRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 dotenv.config();
 
@@ -14,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/recipes", recipeRoutes);
+app.use("/api/auth", authRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
@@ -22,5 +25,3 @@ mongoose.connect(process.env.MONGO_URI)
 app.listen(5000, () => {
   console.log("Server running on port 5000");
 });
-const authRoutes = require("./routes/authRoutes");
-app.use("/api/auth", authRoutes);
